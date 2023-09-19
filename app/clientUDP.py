@@ -8,6 +8,7 @@ from utils import BUFFER_SIZE, IP, PORT
 class Client:
     def __init__(self) -> None:
         self.client_socket = socket(AF_INET, SOCK_DGRAM)
+        self.client_socket.bind(('', PORT))
         self.receiver = Receiver(self.client_socket)
         self.sender = Sender(self.client_socket)
         self.name = ""
@@ -25,7 +26,10 @@ class Client:
         for i in range(2):
             if self.sender.is_waiting():
                 response = input("Digite o nome:")
-                self.sender.send(response, (IP, PORT))
+                self.socket.sendto(response.encode(), IP)
                 
             if i == 1:
                 self.name = response
+                
+novo = Client()
+novo.register()
