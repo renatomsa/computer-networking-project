@@ -50,23 +50,24 @@ class Server:
                 data = self.hi(data, target_address)
             
             elif(data == "bye"):
+                data = self.final_message(data, target_address)
                 self.dict_users.pop(target_address)
+                for users in self.dict_users:
+                    self.server_socket.sendto(data.encode(), users)
 
             elif(data == "list"):
+            
                 for user in self.dict_users:
                     print(self.dict_users[user])
                     self.server_socket.sendto(self.dict_users[user].encode(), target_address)
 
             if (target_address in self.dict_users):
                 data = self.final_message(data, target_address)
-                print(data)
                 for user in self.dict_users:
-                    self.server_socket.sendto(data.encode(), user)
-                
-                
+                    self.server_socket.sendto(data.encode(), user)  
+            print(data)      
         except KeyboardInterrupt:
             print("bye")
-
-        return
+            return
 
 test = Server()

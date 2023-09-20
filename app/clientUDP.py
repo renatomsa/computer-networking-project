@@ -8,6 +8,7 @@ from threading import Thread
 
 class Client:
     def __init__(self) -> None:
+        self.response = ""
         self.client_socket = socket(AF_INET, SOCK_DGRAM)
         self.receiver = Receiver(self.client_socket)
         self.sender = Sender(self.client_socket)
@@ -19,18 +20,20 @@ class Client:
     def sending(self):
         started = False
         while (1):
-            response = input()
-            self.client_socket.sendto(response.encode(), (IP, PORT))
+            self.response = input()
+            self.client_socket.sendto(self.response.encode(), (IP, PORT))
             if (not started):
                 self.receiving_thread.daemon = True
                 self.receiving_thread.start()
-                started = True
+                started = True        
 
+            if (self.response == "bye"): break
+    
     def receiving(self):
         while (1):
             data, server_address = self.client_socket.recvfrom(1024)
             data = data.decode()
             print(data)
+            if (self.response == "bye"): break
         return
-      
 novo = Client()
