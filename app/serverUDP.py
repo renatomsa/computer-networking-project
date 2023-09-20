@@ -54,7 +54,7 @@ class Server:
                 self.map_adr_pkt.pop(target_address) # removendo user do mapeamento
                 for users in self.dict_users:
                     # envia a mensagem para os usuarios restantes
-                    self.server_socket.sendto(("0" + data).encode(), users)
+                    self.server_socket.sendto(("2" + data).encode(), users)
 
             elif(data[1:] == "list"):
                 string = ""

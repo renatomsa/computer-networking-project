@@ -23,7 +23,8 @@ class Client:
         started = False
         try:
             while (1):
-                with data_lock:            
+                with data_lock:
+                    self.list_req = False  # inicializando confirmacao de request da lista          
                     self.pkt_id = '1' if (self.pkt_id == '0') else '0' # alterna identificador do pacote
                     self.ack_confirm = False    # reseta confirmador
                 
@@ -75,11 +76,11 @@ class Client:
                         # client recebe o ack correto
                         self.ack_confirm = True
 
-                if (data[0] == '2'):
+                if (data[0] == '2' or data[1] == "/"):
                     # se a mensagem for de outro usuario (que nao o proprio), a mensagem sera printada com a formatacao
                     print(data[1:])
             return
         except Exception:
-            print("ate logo")
+            pass
 
 novo = Client()
