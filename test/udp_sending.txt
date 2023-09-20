@@ -1,1 +1,0 @@
-- Hello! This file is going to be sent by the client to the server using UDP protocol. The server will then send the file back renamed to the client. The client will then print the file contents to the screen.
