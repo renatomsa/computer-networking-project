@@ -36,11 +36,11 @@ class Server:
         while (1):
             data, client_address = self.server_socket.recvfrom(1024)
             data = data.decode()
-            new_thread = Thread(target = self.start2, args = (client_address, data))  # thread sendo criada para cada mensagem recebida
+            new_thread = Thread(target = self.send, args = (client_address, data))  # thread sendo criada para cada mensagem recebida
             new_thread.start()
         return
             
-    def start2(self, target_address, data):
+    def send(self, target_address, data):
         try:
             listc=False
             if (not (target_address in self.dict_users)):
