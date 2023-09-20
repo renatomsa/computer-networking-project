@@ -72,7 +72,8 @@ class Client:
                     if (data[0] == self.pkt_id):
                         self.ack_confirm = True
 
-                print(data[1:])
+                if (data[0] == '2'):
+                    print(data[1:])
             return
         except Exception:
             print("ate logo")
