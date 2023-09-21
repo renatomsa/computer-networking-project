@@ -1,6 +1,4 @@
 from socket import *
-import os
-from datetime import datetime
 from utils import BUFFER_SIZE, IP, PORT
 from threading import Thread
 from threading import Lock
@@ -64,7 +62,7 @@ class Client:
     def receiving(self):
         try:
             while (1):
-                data, server_address = self.client_socket.recvfrom(1024)
+                data, server_address = self.client_socket.recvfrom(BUFFER_SIZE)
                 data = data.decode()
                 
                 # data[0] == '0' -> ack0

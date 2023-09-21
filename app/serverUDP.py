@@ -1,11 +1,7 @@
 from socket import *
-import os
 from datetime import datetime
-from utils import BUFFER_SIZE, IP, PORT
-import threading 
+from utils import BUFFER_SIZE, PORT
 from threading import Thread
-import time
-
 
 class Server:   
 
@@ -34,7 +30,7 @@ class Server:
     
     def receive(self):
         while (1):
-            data, client_address = self.server_socket.recvfrom(1024)
+            data, client_address = self.server_socket.recvfrom(BUFFER_SIZE)
             data = data.decode()
             new_thread = Thread(target = self.send, args = (client_address, data))  # thread sendo criada para cada mensagem recebida
             new_thread.start()
