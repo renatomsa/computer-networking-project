@@ -42,7 +42,7 @@ class Server:
             
     def send(self, target_address, data):
         try:
-            listc=False
+            listc=False  # inicializa a verificacao de requisicao de lista como False
             if (not (target_address in self.dict_users)):
                 # adicionando user aos dicionarios da classe
                 data = self.hi(data, target_address)
@@ -58,7 +58,7 @@ class Server:
 
             elif(data[1:] == "list"):
                 string = ""
-                listc = True
+                listc = True  # confirma a requisicao da lista
                 if (data[0] == self.map_adr_pkt):
                     # se o pacote esperado é o recebido, atualiza o identificador do pacote esperado 
                     self.map_adr_pkt[target_address] = '1' if (self.map_adr_pkt[target_address] == '0') else '0'
