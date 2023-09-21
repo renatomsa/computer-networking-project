@@ -38,7 +38,7 @@ class Server:
             
     def send(self, target_address, data):
         try:
-            listc=False  # inicializa a verificacao de requisicao de lista como False
+            listc = False  # inicializa a verificacao de requisicao de lista como False
             if (not (target_address in self.dict_users)):
                 # adicionando user aos dicionarios da classe
                 data = self.hi(data, target_address)
@@ -62,7 +62,6 @@ class Server:
                 ack = data[0]
                 for user in self.dict_users:
                     string += f'/ {self.dict_users[user]} -> {user}\n'
-                print(string)
                 string = ack + string
                 self.server_socket.sendto(string.encode(), target_address)
             
@@ -77,8 +76,8 @@ class Server:
                     # enviando a mensagem para os usuarios presentes na sala
                     data_aux = self.final_message(data, target_address)
 
-                    #enviando ack para o user que mandou a mensagem e enviando "2" como prefixo para os demais
-                    data_aux = '2' + data_aux if(user != target_address) else ack + data_aux
+                    # enviando ack para o user que mandou a mensagem e enviando "2" como prefixo para os demais
+                    data_aux = '2' + data_aux if (user != target_address) else ack + data_aux
                     
                     self.server_socket.sendto(data_aux.encode(), user)    
         except KeyboardInterrupt:

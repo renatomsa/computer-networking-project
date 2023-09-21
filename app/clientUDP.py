@@ -74,7 +74,7 @@ class Client:
                         # client recebe o ack correto
                         self.ack_confirm = True
 
-                if (data[0] == '2' or data[1] == "/"):
+                if (data[0] == '2' or data[1] == "/"): # <- lista requisitada
                     # se a mensagem for de outro usuario (que nao o proprio), a mensagem sera printada com a formatacao
                     print(data[1:])
             return
